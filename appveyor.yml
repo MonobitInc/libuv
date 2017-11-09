@@ -36,14 +36,16 @@ build_script:
   - cmd: if "%APPVEYOR_REPO_TAG%" == "true" set APPVEYOR_BUILD_VERSION=%APPVEYOR_REPO_TAG_NAME%
   # vcbuild overwrites the platform variable.
   - cmd: set ARCH=%platform%
-  - cmd: vcbuild.bat release %ARCH% shared
+  - cmd: vcbuild.bat release %ARCH% static
+  - cmd: vcbuild.bat debug %ARCH% static  
+  - ps: ls -r
 
-after_build:
-  - '"%PROGRAMFILES(x86)%\NSIS\makensis" /DVERSION=%APPVEYOR_BUILD_VERSION% /DARCH=%ARCH% libuv.nsi'
+#after_build:
+#  - '"%PROGRAMFILES(x86)%\NSIS\makensis" /DVERSION=%APPVEYOR_BUILD_VERSION% /DARCH=%ARCH% libuv.nsi'
 
-artifacts:
-  - name: Installer
-    path: 'libuv-*.exe'
+#artifacts:
+#  - name: Installer
+#    path: 'libuv-*.exe'
 
 cache:
   - C:\projects\libuv\build\gyp
