@@ -16,12 +16,13 @@ matrix:
 
 environment:
   fast_finish: true
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
-    VSVER: 12
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-    VSVER: 14
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-    VSVER: 15
+  matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
+      VSVER: 12
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      VSVER: 14
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      VSVER: 15
   
 platform:
   - x86
