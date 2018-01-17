@@ -50,7 +50,7 @@ test_script:
 after_test:
   - echo packaging..
 # libuv.lib, libuv.pdbなどまとめて1ファイルにする
-  - ps: $env:ZIPDIR= "libuv_vs" + $env:VSVER + "_" + $env:ARCH
+  - ps: $env:ZIPDIR= "libuv_win_vs" + $env:VSVER + "_" + $env:ARCH
   - mkdir %ZIPDIR%
   - mkdir %ZIPDIR%\Debug
   - mkdir %ZIPDIR%\Release
