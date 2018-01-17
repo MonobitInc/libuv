@@ -42,14 +42,28 @@ build_script:
   # vcbuild overwrites the platform variable.
   - cmd: set ARCH=%platform%
   - cmd: vcbuild.bat release %ARCH% static
-  - cmd: vcbuild.bat debug %ARCH% static  
-  - rename c:\projects\libuv\Release\lib\libuv.lib mb_libuv_vs%VSVER%_%ARCH%_Release.lib
-  - rename c:\projects\libuv\Debug\lib\libuv.lib mb_libuv_vs%VSVER%_%ARCH%_Debug.lib
-#  - ps: ls -r
-  - 7z a c:\projects\libuv\include.zip c:\projects\libuv\include
-  - appveyor PushArtifact c:\projects\libuv\Release\lib\mb_libuv_vs%VSVER%_%ARCH%_Release.lib
-  - appveyor PushArtifact c:\projects\libuv\Debug\lib\mb_libuv_vs%VSVER%_%ARCH%_Debug.lib
-  - appveyor PushArtifact c:\projects\libuv\include.zip
+  - cmd: vcbuild.bat debug %ARCH% static
+
+test_script:
+  - echo skip testing..
+
+after_test:
+  - echo packaging..
+# libuv.lib, libuv.pdbなどまとめて1ファイルにする
+  - ps: $env:ZIPDIR= "libuv_vs" + $env:VSVER + "_" + $env:ARCH
+  - mkdir %ZIPDIR%
+  - mkdir %ZIPDIR%\Debug
+  - mkdir %ZIPDIR%\Release
+  - mkdir %ZIPDIR%\include
+  - copy Release\lib\libuv.lib %ZIPDIR%\Release\
+  - copy Release\obj\libuv\libuv.pdb %ZIPDIR%\Release\
+  - copy Debug\lib\libuv.lib %ZIPDIR%\Debug\
+  - copy Debug\obj\libuv\libuv.pdb %ZIPDIR\Debug\
+  - xcopy /E include %ZIPDIR%\include
+  - ls -lR %ZIPDIR%
+  - 7z a %ZIPDIR%.zip %ZIPDIR%
+  - appveyor PushArtifact %ZIPDIR%.zip
+
 #after_build:
 #  - '"%PROGRAMFILES(x86)%\NSIS\makensis" /DVERSION=%APPVEYOR_BUILD_VERSION% /DARCH=%ARCH% libuv.nsi'
 
