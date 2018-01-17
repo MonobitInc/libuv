@@ -2,6 +2,11 @@ version: v1.16.0.build{build}
 
 init:
   - git config --global core.autocrlf true
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
 
 install:
   - cinst -y nsis
@@ -17,15 +22,15 @@ matrix:
 environment:
   fast_finish: true
   matrix:
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
-      VSVER: 12
+#    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
+#      VSVER: 12
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       VSVER: 14
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      VSVER: 15
+#    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+#      VSVER: 15
   
 platform:
-  - x86
+#  - x86
   - x64
 
 configuration:
