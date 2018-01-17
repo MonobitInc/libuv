@@ -58,7 +58,7 @@ after_test:
   - copy Release\lib\libuv.lib %ZIPDIR%\Release\
   - copy Release\obj\libuv\libuv.pdb %ZIPDIR%\Release\
   - copy Debug\lib\libuv.lib %ZIPDIR%\Debug\
-  - copy Debug\obj\libuv\libuv.pdb %ZIPDIR\Debug\
+  - copy Debug\obj\libuv\libuv.pdb %ZIPDIR%\Debug\
   - xcopy /E include %ZIPDIR%\include
   - ls -lR %ZIPDIR%
   - 7z a %ZIPDIR%.zip %ZIPDIR%
