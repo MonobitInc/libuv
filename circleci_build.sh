@@ -17,6 +17,7 @@ else
     yum install -y -q gcc gcc-c++
     yum install -y -q epel-release
     #    yum install -y -q cmake3
+    yum install -y -q libtool
     yum install -y -q make
     ln -s /usr/bin/cmake3 /usr/bin/cmake
 
