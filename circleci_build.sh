@@ -26,8 +26,16 @@ sh autogen.sh
 ./configure
 make
 
+BASENAME=libuv_${ARCH}_${CIRCLE_SHA1}
+
 mkdir /artifacts
-cp -r include include_${ARCH}_${CIRCLE_SHA1}
-zip -r include_${ARCH}_${CIRCLE_SHA1}.zip include_${ARCH}_${CIRCLE_SHA1}
-cp include_${ARCH}_${CIRCLE_SHA1}.zip /artifacts/
-cp .libs/libuv.a /artifacts/libuv_${ARCH}_${CIRCLE_SHA1}.a
+mkdir /artifacts/${BASENAME}
+
+cp -r include /artifacts/${BASENAME}/
+cp .libs/libuv.a /artifacts/${BASENAME}/
+
+cd /artifacts
+zip -r ${BASENAME}.zip ${BASENAME}
+rm -r ${BASENAME}
+
+
