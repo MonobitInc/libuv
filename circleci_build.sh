@@ -24,7 +24,7 @@ fi
 
 sh autogen.sh
 ./configure
-make
+make CFLAGS=-fPIC
 
 BASENAME=libuv_${ARCH}_${CIRCLE_SHA1}
 
