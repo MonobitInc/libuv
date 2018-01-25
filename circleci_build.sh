@@ -63,5 +63,5 @@ cp .libs/libuv.a /artifacts/${BASENAME}/
 cd /artifacts
 zip -r ${BASENAME}.zip ${BASENAME}
 
-aws s3 cp s3://appveyor-tmp/libuv_bin/${BASENAME}.zip
+aws s3 cp ${BASENAME}.zip s3://appveyor-tmp/libuv_bin/${BASENAME}.zip
 
