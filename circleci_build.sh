@@ -21,9 +21,10 @@ else
     yum install -y -q zip
 
     # aws config
+    yum install -y -q python
     curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-    sudo python get-pip.py
-    sudo pip install awscli
+    python get-pip.py
+    pip install awscli
 
     AWSDIR=~/.aws
     mkdir -p 
