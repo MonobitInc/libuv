@@ -21,6 +21,7 @@ else
     yum install -y -q zip
 
     # aws config
+    yum install -y -q git
     git submodule update --init build_tools
     source build_tools/setup_awscli_linux.sh
 fi    
