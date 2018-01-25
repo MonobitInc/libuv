@@ -21,19 +21,21 @@ else
     yum install -y -q zip
 
     # aws config
-    if [[ $ARCH = *"centos7" ]]; then
-      yum install -y -q https://centos7.iuscommunity.org/ius-release.rpm
-      yum install -y -q python34
-      python3.4 --version
-      python --version
-      curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-      python get-pip.py
+    if [[ $ARCH = *"centos7"* ]]; then
+        echo setup python for centos7        
+        yum install -y -q https://centos7.iuscommunity.org/ius-release.rpm
+        yum install -y -q python34
+        python3.4 --version
+        python --version
+        curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+        python get-pip.py
     fi
 
-    if [[ $ARCH = *"centos6" ]]; then
-      yum install -y python
-      yum install -y python-setuptools
-      easy_install pip
+    if [[ $ARCH = *"centos6"* ]]; then
+        echo setup python for centos6
+        yum install -y python
+        yum install -y python-setuptools
+        easy_install pip
     fi
     
     # centos6/7共通
