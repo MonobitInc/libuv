@@ -27,7 +27,7 @@ else
     pip install awscli
 
     AWSDIR=~/.aws
-    mkdir -p 
+    mkdir -p ${AWSDIR}
     
     echo "[default]" > ${AWSDIR}/config
     echo "output = json" >> ${AWSDIR}/config
