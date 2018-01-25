@@ -21,7 +21,7 @@ else
     yum install -y -q zip
 
     # aws config
-    source setup_awscli_linux.sh
+    source build_tools/setup_awscli_linux.sh
 fi    
 
 
