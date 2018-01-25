@@ -12,7 +12,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - run: bash -e circleci_build.sh centos7.4.1708
+      - run: bash -e -x circleci_build.sh centos7.4.1708
       - store_artifacts:
           path: /artifacts
 
@@ -22,7 +22,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - run: bash -e circleci_build.sh centos6.9
+      - run: bash -e -x circleci_build.sh centos6.9
       - store_artifacts:
           path: /artifacts
 
