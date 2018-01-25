@@ -21,7 +21,10 @@ else
     yum install -y -q zip
 
     # aws config
-    yum install -y -q python
+    yum install -y -q https://centos7.iuscommunity.org/ius-release.rpm
+    yum install -y -q python34
+    python3.4 --version
+    python --version
     curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
     python get-pip.py
     pip install awscli
