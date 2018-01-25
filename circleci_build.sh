@@ -34,7 +34,9 @@ else
     if [[ $ARCH = *"centos6"* ]]; then
         echo setup python for centos6
         yum install -y python
-        yum install -y python-setuptools
+        yum install python-pip
+#        yum install -y python-setuptools
+        
         easy_install pip
     fi
     
