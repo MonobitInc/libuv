@@ -6,7 +6,16 @@ general:
 
 
 jobs:
-  build7:
+  build_android:
+    docker:
+      - image: centos:7.4.1708
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: bash -e -x circleci_build_android.sh 
+      - store_artifacts:
+          path: /artifacts      
+  build_centos7:
     docker:
       - image: centos:7.4.1708
     working_directory: ~/repo
@@ -16,7 +25,7 @@ jobs:
       - store_artifacts:
           path: /artifacts
 
-  build6:
+  build_centos6:
     docker:
       - image: centos:6.9
     working_directory: ~/repo
@@ -30,5 +39,6 @@ workflows:
  version: 2
  build_and_test:
    jobs:
-     - build7
-     - build6
+     - build_centos7
+     - build_centos6
+     - build_android

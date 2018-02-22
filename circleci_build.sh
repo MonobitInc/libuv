@@ -23,7 +23,7 @@ else
     # aws config
     yum install -y -q git
     git submodule update --init build_tools
-    source build_tools/setup_awscli_linux.sh
+    build_tools/setup_awscli_linux.sh ${ARCH}
 fi    
 
 
