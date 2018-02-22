@@ -39,6 +39,6 @@ workflows:
  version: 2
  build_and_test:
    jobs:
-     - build_centos7
-     - build_centos6
+#     - build_centos7
+#     - build_centos6
      - build_android
