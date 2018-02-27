@@ -31,8 +31,22 @@ ${NDK_BUILD} NDK_APPLICATION_MK=./jni/Application.mk NDK_PROJECT_PATH=. NDK_OUT=
 # output is in "local" dir
 
 BASENAME=libuv_android_${CIRCLE_SHA1}
-cp -r include local/
-mv local ${BASENAME}
+
+mkdir /artifacts
+mkdir /artifacts/${BASENAME}
+
+
+cp -r include /artifacts/${BASENAME}/
+mkdir /artifacts/${BASENAME}/mips
+cp local/mips/libuv.a /artifacts/${BASENAME}/mips/
+mkdir /artifacts/${BASENAME}/armeabi-v7a
+cp local/armeabi-v7a/libuv.a /artifacts/${BASENAME}/armeabi-v7a/
+mkdir /artifacts/${BASENAME}/x86
+cp local/x86/libuv.a /artifacts/${BASENAME}/x86/
+mkdir /artifacts/${BASENAME}/armeabi
+cp local/armeabi/libuv.a /artifacts/${BASENAME}/armeabi/
+
+cd /artifacts
 zip -r ${BASENAME}.zip ${BASENAME}
 
 aws s3 cp ${BASENAME}.zip s3://appveyor-tmp/libuv_bin/${BASENAME}.zip --acl public-read
