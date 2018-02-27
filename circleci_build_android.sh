@@ -28,9 +28,13 @@ NDK_BUILD=${NDK_ROOT}/ndk-build
 
 ${NDK_BUILD} NDK_APPLICATION_MK=./jni/Application.mk NDK_PROJECT_PATH=. NDK_OUT=. APP_BUILD_SCRIPT=./jni/Android.mk
 
-ls -la
+# output is in "local" dir
 
+BASENAME=libuv_android_${CIRCLE_SHA1}
+cp -r include local/
+mv local ${BASENAME}
+zip -r ${BASENAME}.zip ${BASENAME}
 
-
+aws s3 ${BASENAME}.zip s3://appveyor-tmp/libuv_bin/${BASENAME}.zip --acl public-read
 
 
