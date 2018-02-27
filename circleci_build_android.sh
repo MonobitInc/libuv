@@ -28,7 +28,9 @@ NDK_BUILD=${NDK_ROOT}/ndk-build
 
 ${NDK_BUILD} NDK_APPLICATION_MK=./jni/Application.mk NDK_PROJECT_PATH=. NDK_OUT=. APP_BUILD_SCRIPT=./jni/Android.mk
 
-ls
+ls -la
+
+
 
 
 
