@@ -35,6 +35,6 @@ cp -r include local/
 mv local ${BASENAME}
 zip -r ${BASENAME}.zip ${BASENAME}
 
-aws s3 ${BASENAME}.zip s3://appveyor-tmp/libuv_bin/${BASENAME}.zip --acl public-read
+aws s3 cp ${BASENAME}.zip s3://appveyor-tmp/libuv_bin/${BASENAME}.zip --acl public-read
 
 
