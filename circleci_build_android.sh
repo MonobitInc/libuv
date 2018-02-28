@@ -10,6 +10,7 @@ yum install -y -q file
 yum install -y -q wget
 yum install -y -q zip
 yum install -y -q unzip
+yum install -y -q which # for android r12b ndk-build internal
 
 export GNUMAKE=/usr/bin/make
 
