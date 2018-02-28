@@ -11,10 +11,13 @@ yum install -y -q wget
 yum install -y -q zip
 yum install -y -q unzip
 
+GNUMAKE=`which make`
+
 # aws config
 yum install -y -q git
 git submodule update --init build_tools
 bash -e -x build_tools/setup_awscli_linux.sh centos7
+
 
 # set up artifacts dir
 BASENAME=libuv_android_${CIRCLE_SHA1}
