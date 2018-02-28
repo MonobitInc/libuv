@@ -24,12 +24,6 @@ cp -r include /artifacts/${BASENAME}/
 
 function setup_build_ndk() {
     NDKVER=$1
-    NDKBIN=${NDKVER}-linux-x86_64.bin
-    wget --quiet http://dl.google.com/android/ndk/${NDKBIN}
-    file ${NDKBIN}
-    chmod a+x ${NDKBIN}
-    ./${NDKBIN} > /dev/null
-    ls
 
     NDK_ROOT=`pwd`/${NDKVER}
     NDK_BUILD=${NDK_ROOT}/ndk-build
@@ -53,8 +47,20 @@ function setup_build_ndk() {
 
 # build
 NDK10VER=android-ndk-r10e
-NDK12VER=android-ndk-r12b
+NDK10URL=http://dl.google.com/android/ndk/${NDK10VER}-linux-x86_64.bin
+wget --quiet ${NDK10URL}
+NDK10BIN=${NDK10VER}-linux-x86_64.bin
+chmod a+x ${NDK10BIN}
+./${NDK10BIN} > /dev/null
 
+
+NDK12VER=android-ndk-r12b
+NDK12ZIP=${NDK12VER}-linux-x86_64.zip
+NDK12URL=https://dl.google.com/android/repository/${NDK12ZIP}
+wget --quiet ${NDK12URL}
+unzip ${NDK12ZIP}
+
+    
 setup_build_ndk ${NDK10VER}
 setup_build_ndk ${NDK12VER}
 
@@ -64,5 +70,6 @@ cd /artifacts
 zip -r ${BASENAME}.zip ${BASENAME}
 
 aws s3 cp ${BASENAME}.zip s3://appveyor-tmp/libuv_bin/${BASENAME}.zip --acl public-read
+
 
 
