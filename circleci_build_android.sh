@@ -11,7 +11,7 @@ yum install -y -q wget
 yum install -y -q zip
 yum install -y -q unzip
 
-GNUMAKE=/usr/bin/make
+export GNUMAKE=/usr/bin/make
 
 
 # aws config
