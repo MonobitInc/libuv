@@ -59,7 +59,7 @@ NDK12VER=android-ndk-r12b
 NDK12ZIP=${NDK12VER}-linux-x86_64.zip
 NDK12URL=https://dl.google.com/android/repository/${NDK12ZIP}
 wget --quiet ${NDK12URL}
-unzip ${NDK12ZIP}
+unzip -q ${NDK12ZIP}
 
     
 setup_build_ndk ${NDK10VER}
