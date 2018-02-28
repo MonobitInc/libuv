@@ -47,7 +47,8 @@ function build_ndk() {
     cp local/armeabi-v7a/libuv.a ${OUTDIR}/armeabi-v7a/
     cp local/x86/libuv.a ${OUTDIR}/x86/
     cp local/armeabi/libuv.a ${OUTDIR}/armeabi/
-    
+
+    rm -rf local
 }
 
 
