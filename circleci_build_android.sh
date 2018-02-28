@@ -23,7 +23,7 @@ mkdir /artifacts/${BASENAME}
 cp -r include /artifacts/${BASENAME}/
 
 
-function setup_build_ndk() {
+function build_ndk() {
     NDKVER=$1
 
     NDK_ROOT=`pwd`/${NDKVER}
@@ -62,8 +62,8 @@ wget --quiet ${NDK12URL}
 unzip -q ${NDK12ZIP}
 
     
-setup_build_ndk ${NDK10VER}
-setup_build_ndk ${NDK12VER}
+build_ndk ${NDK12VER}
+build_ndk ${NDK10VER}
 
 
 
