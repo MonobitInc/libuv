@@ -11,7 +11,8 @@ yum install -y -q wget
 yum install -y -q zip
 yum install -y -q unzip
 
-GNUMAKE=`which make`
+GNUMAKE=/usr/bin/make
+
 
 # aws config
 yum install -y -q git
