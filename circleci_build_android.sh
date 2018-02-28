@@ -55,8 +55,8 @@ function setup_build_ndk() {
 NDK10VER=android-ndk-r10e
 NDK12VER=android-ndk-r12b
 
-setup_build_ndk NDK10VER
-setup_build_ndk NDK12VER
+setup_build_ndk ${NDK10VER}
+setup_build_ndk ${NDK12VER}
 
 
 
