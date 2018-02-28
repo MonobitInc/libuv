@@ -9,6 +9,7 @@ yum install -y -q make
 yum install -y -q file
 yum install -y -q wget
 yum install -y -q zip
+yum install -y -q unzip
 
 # aws config
 yum install -y -q git
