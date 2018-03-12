@@ -12,8 +12,6 @@ yum install -y -q zip
 yum install -y -q unzip
 yum install -y -q which # for android r12b ndk-build internal
 
-export GNUMAKE=/usr/bin/make
-
 
 # aws config
 yum install -y -q git
@@ -76,7 +74,7 @@ build_ndk ${NDK10VER}
 cd /artifacts
 zip -r ${BASENAME}.zip ${BASENAME}
 
-aws s3 cp ${BASENAME}.zip s3://appveyor-tmp/libuv_bin/${BASENAME}.zip --acl public-read
+aws s3 cp ${BASENAME}.zip s3://monobit-engine-public/libuv_bin/${BASENAME}.zip --acl public-read
 
 
 
