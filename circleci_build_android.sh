@@ -38,7 +38,7 @@ cp -r include /artifacts/${BASENAME}/
 function build_ndk() {
     NDKVER=$1
 
-    NDK_ROOT=`pwd`/${NDKVER}
+    NDK_ROOT=`pwd`/android-ndk-${NDKVER}
     NDK_BUILD=${NDK_ROOT}/ndk-build
     ${NDK_BUILD} NDK_APPLICATION_MK=./jni/Application.mk NDK_PROJECT_PATH=. NDK_OUT=. APP_BUILD_SCRIPT=./jni/Android.mk
 
@@ -59,7 +59,6 @@ function build_ndk() {
 }
 
 # build
-
 
 build_ndk ${NDK16VER}
 build_ndk ${NDK12VER}
