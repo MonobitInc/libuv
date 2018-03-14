@@ -18,6 +18,10 @@ yum install -y -q git
 git submodule update --init build_tools
 bash -e -x build_tools/setup_awscli_linux.sh centos7
 
+bash -e -x build_tools/setup_ndk.sh r10e
+bash -e -x build_tools/setup_ndk.sh r12b
+bash -e -x build_tools/setup_ndk.sh r16b
+
 
 # set up artifacts dir
 BASENAME=libuv_android_${CIRCLE_SHA1}
@@ -49,27 +53,7 @@ function build_ndk() {
     rm -rf local
 }
 
-
 # build
-NDK10VER=android-ndk-r10e
-NDK10URL=http://dl.google.com/android/ndk/${NDK10VER}-linux-x86_64.bin
-wget --quiet ${NDK10URL}
-NDK10BIN=${NDK10VER}-linux-x86_64.bin
-chmod a+x ${NDK10BIN}
-./${NDK10BIN} > /dev/null
-
-
-NDK12VER=android-ndk-r12b
-NDK12ZIP=${NDK12VER}-linux-x86_64.zip
-NDK12URL=https://dl.google.com/android/repository/${NDK12ZIP}
-wget --quiet ${NDK12URL}
-unzip -q ${NDK12ZIP}
-
-NDK16VER=android-ndk-r16b
-NDK16ZIP=${NDK16VER}-linux-x86_64.zip
-NDK16URL=https://dl.google.com/android/repository/${NDK16ZIP}
-wget --quiet ${NDK16URL}
-unzip -q ${NDK16ZIP}
 
 
 build_ndk ${NDK16VER}
