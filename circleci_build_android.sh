@@ -65,7 +65,14 @@ NDK12URL=https://dl.google.com/android/repository/${NDK12ZIP}
 wget --quiet ${NDK12URL}
 unzip -q ${NDK12ZIP}
 
-    
+NDK16VER=android-ndk-r16b
+NDK16ZIP=${NDK16VER}-linux-x86_64.zip
+NDK16URL=https://dl.google.com/android/repository/${NDK16ZIP}
+wget --quiet ${NDK16URL}
+unzip -q ${NDK16ZIP}
+
+
+build_ndk ${NDK16VER}
 build_ndk ${NDK12VER}
 build_ndk ${NDK10VER}
 
