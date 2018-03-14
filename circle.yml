@@ -39,6 +39,6 @@ workflows:
  version: 2
  build_and_test:
    jobs:
-#     - centos7
-#     - centos6
+     - centos7
+     - centos6
      - android_all
