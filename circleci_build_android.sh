@@ -18,13 +18,13 @@ yum install -y -q git
 git submodule update --init build_tools
 bash -e -x build_tools/setup_awscli_linux.sh centos7
 
-NDK16VER=r16b
-NDK12VER=r12b
-NDK10VER=r10e
+NDK16VER=r14b
+#NDK12VER=r12b
+#NDK10VER=r10e
 
-bash -e -x build_tools/setup_ndk.sh ${NDK16VER}
-bash -e -x build_tools/setup_ndk.sh ${NDK12VER}
-bash -e -x build_tools/setup_ndk.sh ${NDK10VER}
+bash -e -x build_tools/setup_ndk.sh ${NDK14VER}
+#bash -e -x build_tools/setup_ndk.sh ${NDK12VER}
+#bash -e -x build_tools/setup_ndk.sh ${NDK10VER}
 
 
 
@@ -60,9 +60,9 @@ function build_ndk() {
 
 # build
 
-build_ndk ${NDK16VER}
-build_ndk ${NDK12VER}
-build_ndk ${NDK10VER}
+build_ndk ${NDK14VER}
+#build_ndk ${NDK12VER}
+#build_ndk ${NDK10VER}
 
 
 
