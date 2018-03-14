@@ -18,9 +18,14 @@ yum install -y -q git
 git submodule update --init build_tools
 bash -e -x build_tools/setup_awscli_linux.sh centos7
 
-bash -e -x build_tools/setup_ndk.sh r10e
-bash -e -x build_tools/setup_ndk.sh r12b
-bash -e -x build_tools/setup_ndk.sh r16b
+NDK16VER=r16b
+NDK12VER=r12b
+NDK10VER=r10e
+
+bash -e -x build_tools/setup_ndk.sh ${NDK16VER}
+bash -e -x build_tools/setup_ndk.sh ${NDK12VER}
+bash -e -x build_tools/setup_ndk.sh ${NDK10VER}
+
 
 
 # set up artifacts dir
