@@ -18,7 +18,7 @@ yum install -y -q git
 git submodule update --init build_tools
 bash -e -x build_tools/setup_awscli_linux.sh centos7
 
-NDK16VER=r14b
+NDK14VER=r14b
 #NDK12VER=r12b
 #NDK10VER=r10e
 
