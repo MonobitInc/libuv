@@ -24,10 +24,10 @@ environment:
   matrix:
 #    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
 #      VSVER: 12
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      VSVER: 14
-#    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-#      VSVER: 15
+#    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+#      VSVER: 14
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      VSVER: 15
   
 platform:
 #  - x86
