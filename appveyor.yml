@@ -47,8 +47,8 @@ build_script:
   - cmd: if "%APPVEYOR_REPO_TAG%" == "true" set APPVEYOR_BUILD_VERSION=%APPVEYOR_REPO_TAG_NAME%
   # vcbuild overwrites the platform variable.
   - cmd: set ARCH=%platform%
-  - cmd: vcbuild.bat release %ARCH% static
-  - cmd: vcbuild.bat debug %ARCH% static
+  - cmd: vcbuild.bat release %ARCH% static vs2017
+  - cmd: vcbuild.bat debug %ARCH% static vs2017
 
 test_script:
   - echo skip testing..
