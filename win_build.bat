@@ -2,8 +2,11 @@ rem MPM windows build
 
 
 set GYP_MSVS_VERSION=2017
+rd /s /q Debug Release
 call vcbuild.bat release x64 static vs2017
-call vcbuild.bat debug x64 static vs2017
+rename Release x64
+call vcbuild.bat release x86 static vs2017
+rename Release x86
 
 
 For /f "tokens=2-4 delims=/ " %%a in ('date /t') do (set mydate=%%c%%a%%b)
@@ -11,13 +14,15 @@ For /f "tokens=1-2 delims=/: " %%a in ("%TIME%") do (if %%a LSS 10 (set mytime=0
 echo %mydate%%mytime%
 set datestr=%mydate%%mytime%
 
-set basename=libuv-win64
+set basename=libuv-win
 set zipdir=%basename%-%datestr%
 mkdir %zipdir%
 mkdir %zipdir%\include
+mkdir %zipdir%\x86
+mkdir %zipdir%\x64
 xcopy /E include %zipdir%\include
-copy Release\lib\libuv.lib %zipdir%\libuv.lib
-copy Debug\lib\libuv.lib %zipdir%\libuv_debug.lib
+copy x86\lib\libuv.lib %zipdir%\x86\libuv.lib
+copy x64\lib\libuv.lib %zipdir%\x64\libuv.lib
 git log -1 --pretty=oneline > %zipir%\git_revision.txt
 dir %zipdir%
 rd /s /q %basename%-latest
