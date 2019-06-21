@@ -1,12 +1,7 @@
-version: v1.16.0.build{build}
+version: v1.18.0.build{build}
 
 init:
   - git config --global core.autocrlf true
-#  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-
-on_finish:
-#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-
 
 install:
   - cinst -y nsis
@@ -19,63 +14,19 @@ matrix:
     - platform: x64
       configuration: Release
 
-environment:
-  fast_finish: true
-  matrix:
-#    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
-#      VSVER: 12
-#    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-#      VSVER: 14
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      VSVER: 15
-  
 platform:
-#  - x86
+  - x86
   - x64
 
 configuration:
   - Release
 
-before_build:
-  - ps: >-
-      If ($env:VSVER -Match "15" ) {
-        $env:VCVARSALL_BAT="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"
-      }
-      
 build_script:
   # Fixed tag version number if using a tag.
   - cmd: if "%APPVEYOR_REPO_TAG%" == "true" set APPVEYOR_BUILD_VERSION=%APPVEYOR_REPO_TAG_NAME%
   # vcbuild overwrites the platform variable.
   - cmd: set ARCH=%platform%
-  - cmd: vcbuild.bat release %ARCH% static vs2017
-  - cmd: vcbuild.bat debug %ARCH% static vs2017
-
-test_script:
-  - echo skip testing..
-
-after_test:
-  - echo packaging..
-# libuv.lib, libuv.pdbなどまとめて1ファイルにする
-  - ps: $env:ZIPDIR= "libuv_win_vs" + $env:VSVER + "_" + $env:ARCH
-  - mkdir %ZIPDIR%
-  - mkdir %ZIPDIR%\Debug
-  - mkdir %ZIPDIR%\Release
-  - mkdir %ZIPDIR%\include
-  - copy Release\lib\libuv.lib %ZIPDIR%\Release\
-  - copy Release\obj\libuv\libuv.pdb %ZIPDIR%\Release\
-  - copy Debug\lib\libuv.lib %ZIPDIR%\Debug\
-  - copy Debug\obj\libuv\libuv.pdb %ZIPDIR%\Debug\
-  - xcopy /E include %ZIPDIR%\include
-  - ls -lR %ZIPDIR%
-  - 7z a %ZIPDIR%.zip %ZIPDIR%
-  - appveyor PushArtifact %ZIPDIR%.zip
-
-#after_build:
-#  - '"%PROGRAMFILES(x86)%\NSIS\makensis" /DVERSION=%APPVEYOR_BUILD_VERSION% /DARCH=%ARCH% libuv.nsi'
-
-#artifacts:
-#  - name: Installer
-#    path: 'libuv-*.exe'
+  - cmd: vcbuild.bat release %ARCH% shared
 
 cache:
   - C:\projects\libuv\build\gyp
