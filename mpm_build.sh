@@ -9,7 +9,7 @@ if [ "$UNAME" = "Darwin i386" ]; then
     OSXVER=`sw_vers -productVersion | ruby -e 'print gets.split(".")[0..1].join(".")'`
     PKGDIR="libuv-macos$OSXVER-$DATE"
 else
-    PKGDIR="udp-el7-$DATE"
+    PKGDIR="libuv-el7-$DATE"
 fi
 
 sh autogen.sh
