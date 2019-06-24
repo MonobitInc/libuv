@@ -66,6 +66,7 @@ dir %zipdir%
 rd /s /q %basename%-latest
 mkdir %basename%-latest
 xcopy /E %zipdir% %basename%-latest
+if exist %basename%-latest.zip del /f %basename%-latest.zip
 7z a %zipdir%.zip %zipdir%
 7z a %basename%-latest.zip %basename%-latest
 aws s3 cp %zipdir%.zip s3://monobit/libuv/%zipdir%.zip
