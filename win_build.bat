@@ -4,22 +4,43 @@ echo on
 
 setlocal
 
-cmake .
-
 rd /s /q Debug Release x86 x64 x86.dbg x64.dbg
-call vcbuild.bat release x64 static vs2017
+del uv.vcxproj uv_a.vcxproj libuv.sln
+del CMakeCache.txt cmake_install.cmake
+rd /s /q CMakeFiles
+
+
+call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"  x86
+cmake -G "Visual Studio 15 2017" .
+
+msbuild libuv.sln /t:Rebuild /p:Configuration=Release /p:Platform=Win32 /clp:NoSummary;NoItemAndPropertyList;Verbosity=minimal /nologo
 if %errorlevel% neq 0 (  exit /B )
-rename Release x64
-call vcbuild.bat release x86 static vs2017
+msbuild libuv.sln /t:Rebuild /p:Configuration=Debug /p:Platform=Win32 /clp:NoSummary;NoItemAndPropertyList;Verbosity=minimal /nologo
 if %errorlevel% neq 0 (  exit /B )
+
 rename Release x86
-call vcbuild.bat debug x64 static vs2017
-if %errorlevel% neq 0 (  exit /B )
-rename Debug x64.dbg
-call vcbuild.bat debug x86 static vs2017
-if %errorlevel% neq 0 (  exit /B )
 rename Debug x86.dbg
 
+del CMakeCache.txt cmake_install.cmake
+rd /s /q CMakeFiles
+
+call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"  x64
+cmake -G "Visual Studio 15 2017 Win64" .
+
+msbuild libuv.sln /t:Rebuild /p:Configuration=Release /p:Platform=x64 /clp:NoSummary;NoItemAndPropertyList;Verbosity=minimal /nologo
+if %errorlevel% neq 0 (  exit /B )
+msbuild libuv.sln /t:Rebuild /p:Configuration=Debug /p:Platform=x64 /clp:NoSummary;NoItemAndPropertyList;Verbosity=minimal /nologo
+if %errorlevel% neq 0 (  exit /B )
+
+
+rd /s /q x64
+rename Release x64
+rename Debug x64.dbg
+
+del uv.vcxproj uv_a.vcxproj libuv.sln
+
+del CMakeCache.txt cmake_install.cmake
+rd /s /q CMakeFiles
 
 For /f "tokens=2-4 delims=/ " %%a in ('date /t') do (set mydate=%%c%%a%%b)
 For /f "tokens=1-2 delims=/: " %%a in ("%TIME%") do (if %%a LSS 10 (set mytime=0%%a%%b) else (set mytime=%%a%%b)) 
@@ -33,12 +54,12 @@ mkdir %zipdir%\include
 mkdir %zipdir%\x86
 mkdir %zipdir%\x64
 xcopy /E include %zipdir%\include
-copy x86\lib\libuv.lib %zipdir%\x86\libuv.lib
-copy x86.dbg\lib\libuv.lib %zipdir%\x86\libuv_debug.lib
-copy x86.dbg\libuv.pdb %zipdir%\x86\libuv.pdb
-copy x64\lib\libuv.lib %zipdir%\x64\libuv.lib
-copy x64.dbg\lib\libuv.lib %zipdir%\x64\libuv_debug.lib
-copy x64.dbg\libuv.pdb %zipdir%\x64\libuv.pdb
+copy x86\uv.lib %zipdir%\x86\uv.lib
+copy x86.dbg\uv.lib %zipdir%\x86\uv_debug.lib
+copy x86.dbg\uv.pdb %zipdir%\x86\uv.pdb
+copy x64\uv.lib %zipdir%\x64\uv.lib
+copy x64.dbg\uv.lib %zipdir%\x64\uv_debug.lib
+copy x64.dbg\uv.pdb %zipdir%\x64\uv.pdb
 
 git log -1 --pretty=oneline > %zipir%\git_revision.txt
 dir %zipdir%
