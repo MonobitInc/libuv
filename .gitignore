@@ -80,6 +80,7 @@ libuv-*.tar.*
 
 local
 libuv-android-*
+libuv-ios-*
 
 x64.dbg
 x64
