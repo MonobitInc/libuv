@@ -4,7 +4,7 @@ echo on
 
 setlocal
 
-rd /s /q Debug Release x86 x64 x86.dbg x64.dbg
+rd /s /q Debug Release x86 x64 x86.dbg x64.dbg MDRELEASE x86.md x64.md
 del uv.vcxproj uv_a.vcxproj libuv.sln
 del CMakeCache.txt cmake_install.cmake
 rd /s /q CMakeFiles
@@ -13,6 +13,10 @@ rd /s /q CMakeFiles
 call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"  x86
 cmake -G "Visual Studio 15 2017" .
 
+
+# need MD for UE4
+msbuild libuv.sln /t:Rebuild /p:Configuration=MDRelease /p:Platform=Win32 /clp:NoSummary;NoItemAndPropertyList;Verbosity=minimal /nologo
+if %errorlevel% neq 0 (  exit /B )
 msbuild libuv.sln /t:Rebuild /p:Configuration=Release /p:Platform=Win32 /clp:NoSummary;NoItemAndPropertyList;Verbosity=minimal /nologo
 if %errorlevel% neq 0 (  exit /B )
 msbuild libuv.sln /t:Rebuild /p:Configuration=Debug /p:Platform=Win32 /clp:NoSummary;NoItemAndPropertyList;Verbosity=minimal /nologo
@@ -20,6 +24,7 @@ if %errorlevel% neq 0 (  exit /B )
 
 rename Release x86
 rename Debug x86.dbg
+rename MDRELEASE x86.md
 
 del CMakeCache.txt cmake_install.cmake
 rd /s /q CMakeFiles
@@ -27,6 +32,8 @@ rd /s /q CMakeFiles
 call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"  x64
 cmake -G "Visual Studio 15 2017 Win64" .
 
+msbuild libuv.sln /t:Rebuild /p:Configuration=MDRelease /p:Platform=x64 /clp:NoSummary;NoItemAndPropertyList;Verbosity=minimal /nologo
+if %errorlevel% neq 0 (  exit /B )
 msbuild libuv.sln /t:Rebuild /p:Configuration=Release /p:Platform=x64 /clp:NoSummary;NoItemAndPropertyList;Verbosity=minimal /nologo
 if %errorlevel% neq 0 (  exit /B )
 msbuild libuv.sln /t:Rebuild /p:Configuration=Debug /p:Platform=x64 /clp:NoSummary;NoItemAndPropertyList;Verbosity=minimal /nologo
@@ -36,6 +43,7 @@ if %errorlevel% neq 0 (  exit /B )
 rd /s /q x64
 rename Release x64
 rename Debug x64.dbg
+rename MDRELEASE x64.md
 
 del uv.vcxproj uv_a.vcxproj libuv.sln
 
@@ -55,9 +63,11 @@ mkdir %zipdir%\x86
 mkdir %zipdir%\x64
 xcopy /E include %zipdir%\include
 copy x86\uv.lib %zipdir%\x86\uv.lib
+copy x86.md\uv.lib %zipdir%\x86\uv_md.lib
 copy x86.dbg\uv.lib %zipdir%\x86\uv_debug.lib
 copy x86.dbg\uv.pdb %zipdir%\x86\uv.pdb
 copy x64\uv.lib %zipdir%\x64\uv.lib
+copy x64.md\uv.lib %zipdir%\x64\uv_md.lib
 copy x64.dbg\uv.lib %zipdir%\x64\uv_debug.lib
 copy x64.dbg\uv.pdb %zipdir%\x64\uv.pdb
 

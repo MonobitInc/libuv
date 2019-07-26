@@ -80,3 +80,16 @@ libuv-*.tar.*
 
 local
 libuv-android-*
+
+x64.dbg
+x64
+x64.md
+x86.dbg
+x86
+x86.md
+uv.dir
+uv_a.dir
+libuv-win-*
+Win32
+CTestTestfile.cmake
+
