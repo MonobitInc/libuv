@@ -12,12 +12,16 @@ function build_ndk() {
     mkdir ${OUTDIR}
     mkdir ${OUTDIR}/mips    
     mkdir ${OUTDIR}/armeabi-v7a
+    mkdir ${OUTDIR}/arm64-v8a    
     mkdir ${OUTDIR}/x86
+    mkdir ${OUTDIR}/x86_64
     mkdir ${OUTDIR}/armeabi
 
     cp local/mips/libuv.a ${OUTDIR}/mips/
     cp local/armeabi-v7a/libuv.a ${OUTDIR}/armeabi-v7a/
+    cp local/arm64-v8a/libuv.a ${OUTDIR}/arm64-v8a/    
     cp local/x86/libuv.a ${OUTDIR}/x86/
+    cp local/x86_64/libuv.a ${OUTDIR}/x86_64/    
     cp local/armeabi/libuv.a ${OUTDIR}/armeabi/
 
     zip -r ${OUTDIR}.zip ${OUTDIR}
