@@ -77,3 +77,6 @@ ipch
 
 # make dist output
 libuv-*.tar.*
+
+local
+libuv-android-*
