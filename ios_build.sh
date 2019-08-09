@@ -1,5 +1,7 @@
 # build libuv for ios 12.4
 
+rm libuv.a *.o
+
 
 IOSVER=12.4
 
@@ -14,6 +16,7 @@ clang ${SDKOPT} -c -I./include -I./src ${SRCS}
 
 ar cr libuv.a ${OBJS}
 ranlib libuv.a
+
 
 # upload
 DATESTR=`date "+%Y%m%d%H%M"`
