@@ -1,3 +1,4 @@
+set -xeu
 
 function build_ndk() {
     NDKVER=$1
@@ -23,7 +24,8 @@ function build_ndk() {
     cp local/x86/libuv.a ${OUTDIR}/x86/
     cp local/x86_64/libuv.a ${OUTDIR}/x86_64/    
     cp local/armeabi/libuv.a ${OUTDIR}/armeabi/
-
+    cp -r include ${OUTDIR}/
+    
     zip -r ${OUTDIR}.zip ${OUTDIR}
     aws s3 cp ${OUTDIR}.zip s3://monobit/libuv/${OUTDIR}.zip
 }
