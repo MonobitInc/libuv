@@ -31,6 +31,7 @@ SRCS += $(LOCAL_PATH)/src/unix/linux-inotify.c
 SRCS += $(LOCAL_PATH)/src/unix/linux-syscalls.c
 SRCS += $(LOCAL_PATH)/src/unix/pthread-fixes.c
 SRCS += $(LOCAL_PATH)/src/unix/android-ifaddrs.c
+SRCS += $(LOCAL_PATH)/src/unix/pthread-barrier.c
 LOCAL_SRC_FILES := $(SRCS)
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
