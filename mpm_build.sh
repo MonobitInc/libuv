@@ -6,7 +6,7 @@ DATE=`date "+%Y%m%d%H%M"`
 
 
 if [ "$UNAME" = "Darwin i386" ]; then
-    OSXVER=`sw_vers -productVersion | ruby -e 'print gets.split(".")[0..1].join(".")'`
+    OSXVER=`sw_vers -productVersion`
     PKGDIR="libuv-macos$OSXVER-$DATE"
 else
     PKGDIR="libuv-el7-$DATE"
