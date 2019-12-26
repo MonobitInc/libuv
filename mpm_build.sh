@@ -30,7 +30,6 @@ if [[ "${UNAME}" == "Linux" ]]; then
   SYMLINKOPT=-L
 fi
 
-
 sh autogen.sh
 ./configure
 make CFLAGS=-fPIC
