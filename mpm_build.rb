@@ -9,7 +9,7 @@ basename=nil
 
 if uname == "Darwin" then
   print "Darwin detected\n"
-  osxver=`sw_vers -productVersion` # ex. 10.15
+  osxver=`sw_vers -productVersion`.strip # ex. 10.15
   basename="libuv-macos#{osxver}-#{datestr}"
 elsif uname=="Linux" then
   print "linux detected\n"
